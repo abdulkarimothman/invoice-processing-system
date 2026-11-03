@@ -1,6 +1,5 @@
 from invoice_automation.schemas.invoice import InvoiceData
 
-
 REQUIRED_FIELDS = (
     "vendor_name",
     "invoice_number",
@@ -21,9 +20,7 @@ def validate_invoice(invoice: InvoiceData) -> InvoiceData:
             if reason not in review_reasons:
                 review_reasons.append(reason)
 
-    requires_human_review = (
-        invoice.requires_human_review or bool(review_reasons)
-    )
+    requires_human_review = invoice.requires_human_review or bool(review_reasons)
 
     return invoice.model_copy(
         update={
